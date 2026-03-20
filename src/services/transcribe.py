@@ -1,11 +1,16 @@
 from youtube_transcript_api import YouTubeTranscriptApi
-from youtube_transcript_api.proxies import GenericProxyConfig
+from youtube_transcript_api.proxies import WebshareProxyConfig
+
+from src.core.config import settings
 
 
 class TranscribeService:
     def __init__(self):
         self.ytt = YouTubeTranscriptApi(
-            proxy_config=GenericProxyConfig(http_url="http://47.243.181.85:41714")
+            proxy_config=WebshareProxyConfig(
+                proxy_username=settings.WEBSHARE_PROXY_USERNAME,
+                proxy_password=settings.WEBSHARE_PROXY_PASSWORD,
+            )
         )
 
     def transcribe(self, video_id: str):
