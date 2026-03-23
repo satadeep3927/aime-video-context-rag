@@ -20,7 +20,7 @@ IMPORTANT RULES:
 """
 
 
-def create_youtube_agent(video_id: str) -> Agent:
+def create_youtube_agent(video_id: str, language: str = "en") -> Agent:
     """Creates an Agent configured to answer questions about a specific YouTube video."""
     return Agent(
         name="YouTubeVideoAgent",
@@ -30,7 +30,9 @@ def create_youtube_agent(video_id: str) -> Agent:
         instructions=[
             SYSTEM_PROMPT,
             f"The current video_id is: {video_id}",
+            f"The current language is: {language}",
             "Always use this video_id when calling transcript tools.",
+            "Always output in the specified language.",
         ],
         markdown=True,
     )
